@@ -7,6 +7,15 @@ namespace TARgv20
     {
         public MainPage()
         {
+            Label label_lbl = new Label
+            {
+                Text = "Tervitus!",
+                FontSize = 30,
+                FontFamily = "Georgia",
+                //HorizontalTextAlignment = "Center"
+                //BackgroundColor = Color.Azure
+            };
+
             Button box_btn = new Button
             {
                 Text = "BoxView",
@@ -21,12 +30,24 @@ namespace TARgv20
             };
             entry_btn.Clicked += Entry_btn_Clicked;
 
+            Button timer_btn = new Button
+            {
+                Text = "Timer",
+                BackgroundColor = Color.Azure
+            };
+            timer_btn.Clicked += Timer_btn_Clicked;
+
             StackLayout st = new StackLayout
             {
-                Children = { box_btn, entry_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn }
             };
             st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void Timer_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Timer_Page());
         }
 
         private async void Entry_btn_Clicked(object sender, EventArgs e)
