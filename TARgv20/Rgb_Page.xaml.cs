@@ -7,6 +7,7 @@ namespace TARgv20
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Rgb_Page : ContentPage
     {
+        Random rnd = new Random();
         public Rgb_Page()
         {
             InitializeComponent();
@@ -42,6 +43,27 @@ namespace TARgv20
         private void GenerateRgbColors(int sliderR, int sliderG, int sliderB)
         {
             TxtColorPreviewer.BackgroundColor = Color.FromRgb(sliderR, sliderG, sliderB);
+        }
+
+        private void RandButton_Clicked(object sender, EventArgs e)
+        {
+            // задаём случайные параметры
+            int value1 = rnd.Next(0, 255); //R
+            int value2 = rnd.Next(0, 255); //G
+            int value3 = rnd.Next(0, 255); //B
+
+            // устанавливаем их для слайдеров
+            SliderR.Value = value1;
+            SliderG.Value = value2;
+            SliderB.Value = value3;
+
+            // отображаем числа
+            RValue.Text = value1.ToString();
+            GValue.Text = value2.ToString();
+            BValue.Text = value3.ToString();
+
+            // меняем цвет
+            GenerateRgbColors(value1, value2, value3);
         }
     }
 }
