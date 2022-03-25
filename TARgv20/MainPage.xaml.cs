@@ -37,12 +37,24 @@ namespace TARgv20
             };
             timer_btn.Clicked += Timer_btn_Clicked;
 
+            Button rgb_btn = new Button
+            {
+                Text = "RGB",
+                BackgroundColor = Color.Azure
+            };
+            rgb_btn.Clicked += Rgb_btn_Clicked;
+
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn }
             };
             st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void Rgb_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Rgb_Page());
         }
 
         private async void Timer_btn_Clicked(object sender, EventArgs e)
