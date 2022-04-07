@@ -7,8 +7,9 @@
             <FlexLayout>
                 <Label x:Name="lbl"
                        Text="Vajuta nuppule ja siia"
+                       TextColor="Black"
                        FontSize="Medium"
-                       BackgroundColor="Beige">
+                       BackgroundColor="GhostWhite">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Label.GestureRecognizers>

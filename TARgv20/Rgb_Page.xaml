@@ -35,6 +35,7 @@
                     HorizontalOptions="Start"
                     FontSize="Medium"/>
                 <Slider x:Name="SliderR"
+                    BackgroundColor="PaleVioletRed"
                     Grid.Column="1"
                     Grid.Row="0"
                     Minimum="0"
@@ -52,6 +53,7 @@
                     HorizontalOptions="Start"
                     FontSize="Medium"/>
                 <Slider x:Name="SliderG"
+                    BackgroundColor="ForestGreen"
                     Grid.Column="1"
                     Grid.Row="1"
                     Minimum="0"
@@ -69,6 +71,7 @@
                     HorizontalOptions="Start"
                     FontSize="Medium"/>
                 <Slider x:Name="SliderB"
+                    BackgroundColor="CornflowerBlue"
                     Grid.Column="1"
                     Grid.Row="2"
                     Minimum="0"
@@ -85,6 +88,7 @@
         <StackLayout Grid.Row="2" IsClippedToBounds="True"  Padding="20">
             <Button 
                 Text="Random color"
+                TextColor="Black"
                 x:Name="RandButton"
                 BackgroundColor="Azure"
                 Clicked="RandButton_Clicked"/>
