@@ -64,12 +64,25 @@ namespace TARgv20
             };
             picker_btn.Clicked += Picker_btn_Clicked;
 
+            Button table_btn = new Button
+            {
+                Text = "Table",
+                TextColor = Color.White,
+                BackgroundColor = Color.Black
+            };
+            table_btn.Clicked += Table_btn_Clicked;
+
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn }
             };
             //st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void Table_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Table_Page());
         }
 
         private async void Tic_btn_Clicked(object sender, EventArgs e)
