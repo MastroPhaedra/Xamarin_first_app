@@ -48,6 +48,14 @@ namespace TARgv20
             };
             rgb_btn.Clicked += Rgb_btn_Clicked;
 
+            Button tic_btn = new Button
+            {
+                Text = "Tic Tac Toe",
+                TextColor = Color.White,
+                BackgroundColor = Color.Black
+            };
+            tic_btn.Clicked += Tic_btn_Clicked;
+
             Button picker_btn = new Button
             {
                 Text = "Picker",
@@ -58,10 +66,15 @@ namespace TARgv20
 
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, picker_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn }
             };
             //st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void Tic_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Tic_Tac_Toe_Page());
         }
 
         private async void Picker_btn_Clicked(object sender, EventArgs e)
