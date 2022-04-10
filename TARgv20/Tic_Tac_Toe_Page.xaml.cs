@@ -27,7 +27,19 @@ namespace TARgv20
 
             //};
             //img1.GestureRecognizers.Add(tapImage);
+
+            images.Add("0", img1); //1 - Id, 2
+            images.Add("1", img2); //1 - Id, 2
+            images.Add("2", img3); //1 - Id, 2
+            images.Add("3", img4); //1 - Id, 2
+            images.Add("4", img5); //1 - Id, 2
+            images.Add("5", img6); //1 - Id, 2
+            images.Add("6", img7); //1 - Id, 2
+            images.Add("7", img8); //1 - Id, 2
+            images.Add("8", img9); //1 - Id, 2
         }
+
+        public Dictionary<string, Image> images = new Dictionary<string, Image>();
 
         public string current_pic = "x.png";
         string[,] ArrayAmountOfTyhi = new string[9,2] { { "img1", "tyhi.png" }, { "img2", "tyhi.png" }, { "img3", "tyhi.png" }, { "img4", "tyhi.png" }, { "img5", "tyhi.png" }, { "img6", "tyhi.png" }, { "img7", "tyhi.png" }, { "img8", "tyhi.png" }, { "img9", "tyhi.png" } };
@@ -36,11 +48,6 @@ namespace TARgv20
 
         private void RefreshButton_Clicked(object sender, EventArgs e)
         {
-            //for (int i = 0; i < ImageArray.Length; i++)
-            //{
-            //    int pic_name = ImageArray[i].Trim('"');
-            //    pic_name.Source = "tyhi.png";
-            //}
             all_clear();
         }
 
@@ -55,6 +62,7 @@ namespace TARgv20
                 if (ArrayAmountOfTyhi[i, 1] == "tyhi.png")
                 {
                     freeTyhi++;
+                    await DisplayAlert("Miss click", "Ooops!" + freeTyhi, "Ok");
                 }
                 else
                 {
@@ -178,15 +186,11 @@ namespace TARgv20
 
         public void all_clear()
         {
-            img1.Source = "tyhi.png";
-            img2.Source = "tyhi.png";
-            img3.Source = "tyhi.png";
-            img4.Source = "tyhi.png";
-            img5.Source = "tyhi.png";
-            img6.Source = "tyhi.png";
-            img7.Source = "tyhi.png";
-            img8.Source = "tyhi.png";
-            img9.Source = "tyhi.png";
+            foreach (var keyValuePair in images)
+            {
+                var image = keyValuePair.Value;
+                image.Source = "tyhi.png";
+            }
         }
     }
 }
