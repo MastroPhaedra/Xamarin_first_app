@@ -199,6 +199,7 @@ namespace TARgv20
                 Image image = keyValuePair.Value;
                 image.Source = "tyhi.png";
             }
+            botClickAmount = 0;
         }
 
         public async void bot_rand(Image DelFromDic)
@@ -217,10 +218,13 @@ namespace TARgv20
                 {
                     botClickAmount = 0;
                     break;
+                    //System.Environment.Exit(0); // выход из приложения
                 }
             }
-
-            images[rndBotClick].Source = bot_pic;
+            if (botClickAmount != 0)
+            {
+                images[rndBotClick].Source = bot_pic;
+            }
 
             //foreach (var picture in images)
             //{

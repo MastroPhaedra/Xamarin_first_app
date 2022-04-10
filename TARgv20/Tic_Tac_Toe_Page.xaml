@@ -148,7 +148,6 @@
                 </Grid>
                 <Button 
                     Text="VS bot (Off)"
-                    x:Name="BotButton"
                     Grid.Column="2"
                     WidthRequest="80"
                     HeightRequest="80"
