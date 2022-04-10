@@ -16,35 +16,23 @@ namespace TARgv20
         {
             InitializeComponent();
 
-            //Creating TapGestureRecognizers    
-            //var tapImage = new TapGestureRecognizer();
-            //Binding events    
-            //tapImage.Tapped += tapImage_Tapped;
-            //Associating tap events to the image buttons
-            //int i = 0;
-            //foreach (int i, i<10)
-            //{
-
-            //};
-            //img1.GestureRecognizers.Add(tapImage);
-
-            images.Add("0", img1); //1 - Id, 2
-            images.Add("1", img2); //1 - Id, 2
-            images.Add("2", img3); //1 - Id, 2
-            images.Add("3", img4); //1 - Id, 2
-            images.Add("4", img5); //1 - Id, 2
-            images.Add("5", img6); //1 - Id, 2
-            images.Add("6", img7); //1 - Id, 2
-            images.Add("7", img8); //1 - Id, 2
-            images.Add("8", img9); //1 - Id, 2
+            // так может добавлять
+            AddigToDicData();
         }
 
-        public Dictionary<string, Image> images = new Dictionary<string, Image>();
+        public Dictionary<int, Image> images = new Dictionary<int, Image>();
+
+        // a так не может добавлять
+        //{
+        //    [0] = img1,
+        //    [1] = img2,
+        //    [2] = img3,
+        //};
+
+        public bool botOnOff = false; //флаг активации и работы бота (пока будет активен, бот будет играть)
+        public string bot_pic = "";
 
         public string current_pic = "x.png";
-        string[,] ArrayAmountOfTyhi = new string[9,2] { { "img1", "tyhi.png" }, { "img2", "tyhi.png" }, { "img3", "tyhi.png" }, { "img4", "tyhi.png" }, { "img5", "tyhi.png" }, { "img6", "tyhi.png" }, { "img7", "tyhi.png" }, { "img8", "tyhi.png" }, { "img9", "tyhi.png" } };
-
-        //public string[] ImageArray = new string[] {"img1", "img2", "img3", "img4", "img5", "img6", "img7", "img8", "img9" };
 
         private void RefreshButton_Clicked(object sender, EventArgs e)
         {
@@ -53,30 +41,19 @@ namespace TARgv20
 
         private async void VSbotButton_Clicked(object sender, EventArgs e)
         {
-            all_clear();
-            int amTyhiLength = (ArrayAmountOfTyhi.Length)/2;
-            await DisplayAlert("Miss click", "Ooops!" + amTyhiLength + "Ooops!" + ArrayAmountOfTyhi[8,1], "Ok");
-            int freeTyhi = 0;
-            for (int i = 0; i < amTyhiLength; i++)
-            {
-                if (ArrayAmountOfTyhi[i, 1] == "tyhi.png")
-                {
-                    freeTyhi++;
-                    await DisplayAlert("Miss click", "Ooops!" + freeTyhi, "Ok");
-                }
-                else
-                {
-                    if (current_pic == "x.png")
-                    {
-                        winner_check("o.png");
-                    }
-                    else
-                    {
-                        winner_check("x.png");
-                    }
-                }
-            }
+            var buttonText = (Button)sender;
 
+            if (botOnOff)
+            {
+                botOnOff = false;
+                buttonText.Text = "VS bot (Off)";
+            }
+            else
+            {
+                botOnOff = true;
+                buttonText.Text = "VS bot (On)";
+            }
+            all_clear();
         }
 
         private async void RulesButton_Clicked(object sender, EventArgs e)
@@ -93,11 +70,13 @@ namespace TARgv20
             {
                 current_pic = "o.png";
                 imageSource.Source = current_pic;
+                bot_pic = "x.png";
             }
             else
             {
                 current_pic = "x.png";
                 imageSource.Source = current_pic;
+                bot_pic = "o.png";
             }
         }
 
@@ -105,26 +84,39 @@ namespace TARgv20
         {
             var imageSource = (Image)sender; // name in xaml
             var selectedImage = imageSource.Source as FileImageSource; // name.Source ("File: x.png") without "File: "
-            //var PISource = players_turn.Source.ToString().Substring(6); // этот метод сокращает кол-во строк, но мне не особо нравится
-            //var selectedImageName = imageSource.XAMLNameValue;
 
             if (current_pic == "x.png" && selectedImage.File == "tyhi.png") // || selectedImage.File == "tyhi.png"
             {
                 imageSource.Source = "x.png";
-                current_pic = "o.png";
-                players_turn.Source = current_pic;
+                if (botOnOff)
+                {
+                    bot_pic = "o.png";
+                    bot_rand(imageSource);
+                }
+                else
+                {
+                    current_pic = "o.png";
+                    players_turn.Source = current_pic;
+                }
                 winner_check("x.png");
             }
             else if(current_pic == "o.png" && selectedImage.File == "tyhi.png")
             {
                 imageSource.Source = "o.png";
-                current_pic = "x.png";
-                players_turn.Source = current_pic;
+                if (botOnOff)
+                {
+                    bot_pic = "x.png";
+                    bot_rand(imageSource);
+                }
+                else
+                {
+                    current_pic = "x.png";
+                    players_turn.Source = current_pic;
+                }
                 winner_check("o.png");
             }
             else
             {
-                //await DisplayAlert("Miss click", "current_pic - " + current_pic + "\n imageSource.Source - " + imageSource.Source + "\n players_turn.Source - " + players_turn.Source, "Ok");
                 await DisplayAlert("Miss click", "Ooops! \nSa ei saa seda muuta!", "Ok");
             }
         }
@@ -172,25 +164,73 @@ namespace TARgv20
 
         public async void winner_alert()
         {
-            if (current_pic != "x.png")
+            if (botOnOff)
             {
-                await DisplayAlert("Winner", "Winner is X", "Ok");
-                all_clear();
+                if (bot_pic != "x.png")
+                {
+                    await DisplayAlert("Winner", "Winner is X", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Winner", "Winner is O", "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Winner", "Winner is O", "Ok");
-                all_clear();
+                if (current_pic != "x.png")
+                {
+                    await DisplayAlert("Winner", "Winner is X", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Winner", "Winner is O", "Ok");
+                }
             }
+            all_clear();
         }
 
         public void all_clear()
         {
+            images.Clear();
+            AddigToDicData();
             foreach (var keyValuePair in images)
             {
-                var image = keyValuePair.Value;
+                Image image = keyValuePair.Value;
                 image.Source = "tyhi.png";
             }
+        }
+
+        public async void bot_rand(Image DelFromDic)
+        {
+            Random rnd = new Random();
+            int k = images.Where(x => x.Value == DelFromDic).FirstOrDefault().Key;
+            images.Remove(k);
+            int DicCount = images.Count();
+
+            //foreach (var picture in images)
+            //{
+            //    await DisplayAlert("Otvet", $"key: {images.Keys}  value: {images.Values}", "Ok");
+            //}
+            //int rImage = rnd.Next(0, DicCount); // от 0 включительно до 9 (не включая её)
+            //var namePic = images[rImage];
+            //while (rImage < 0 && rImage > 8 && namePic.ToString() != "tyhi.png") // || rImage < 0 && rImage > 8
+            //{
+            //    rImage++;
+            //    namePic = images[rImage];
+            //}
+        }
+
+        public void AddigToDicData()
+        {
+            images.Add(0, img1); //1 - ключ, 2 - значение
+            images.Add(1, img2); //1 - ключ, 2 - значение
+            images.Add(2, img3); //1 - ключ, 2 - значение
+            images.Add(3, img4); //1 - ключ, 2 - значение
+            images.Add(4, img5); //1 - ключ, 2 - значение
+            images.Add(5, img6); //1 - ключ, 2 - значение
+            images.Add(6, img7); //1 - ключ, 2 - значение
+            images.Add(7, img8); //1 - ключ, 2 - значение
+            images.Add(8, img9); //1 - ключ, 2 - значение
         }
     }
 }
