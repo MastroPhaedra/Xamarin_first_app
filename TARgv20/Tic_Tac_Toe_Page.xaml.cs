@@ -31,6 +31,7 @@ namespace TARgv20
 
         public bool botOnOff = false; //флаг активации и работы бота (пока будет активен, бот будет играть)
         public string bot_pic = "";
+        public int botClickAmount = 0;
 
         public string current_pic = "x.png";
 
@@ -191,8 +192,8 @@ namespace TARgv20
 
         public void all_clear()
         {
-            images.Clear();
-            AddigToDicData();
+            //images.Clear();
+            //AddigToDicData();
             foreach (var keyValuePair in images)
             {
                 Image image = keyValuePair.Value;
@@ -202,10 +203,24 @@ namespace TARgv20
 
         public async void bot_rand(Image DelFromDic)
         {
+            botClickAmount++;
             Random rnd = new Random();
-            int k = images.Where(x => x.Value == DelFromDic).FirstOrDefault().Key;
-            images.Remove(k);
+            //int k = images.Where(x => x.Value == DelFromDic).FirstOrDefault().Key;
+            //images.Remove(k);
             int DicCount = images.Count();
+            int rndBotClick = rnd.Next(0, DicCount);
+
+            while (images[rndBotClick].Source.ToString().Substring(6) != "tyhi.png")
+            {
+                rndBotClick = rnd.Next(0, DicCount);
+                if (botClickAmount == 5)
+                {
+                    botClickAmount = 0;
+                    break;
+                }
+            }
+
+            images[rndBotClick].Source = bot_pic;
 
             //foreach (var picture in images)
             //{
