@@ -35,9 +35,9 @@ namespace TARgv20
 
             webView = new WebView { };
 
-            SwipeGestureRecognizer swipe = new SwipeGestureRecognizer();
-            swipe.Swiped += Swipe_Swiped;
-            swipe.Direction = SwipeDirection.Right;
+            //SwipeGestureRecognizer swipe = new SwipeGestureRecognizer();
+            //swipe.Swiped += Swipe_Swiped;
+            //swipe.Direction = SwipeDirection.Right;
 
             home = new ImageButton 
             {
@@ -84,7 +84,7 @@ namespace TARgv20
             };
 
             st = new StackLayout { Children = { picker, frame } };
-            frame.GestureRecognizers.Add(swipe);
+            //frame.GestureRecognizers.Add(swipe);
             Content = st;
         }
 
@@ -93,11 +93,11 @@ namespace TARgv20
             int arlenght;
             link = "https://" + line.Text;
             arlenght = lehed.Length;
-            await DisplayAlert("arlenght ", "Ans "+arlenght, "OK");
+            //await DisplayAlert("arlenght ", "Ans "+arlenght, "OK");
             //Array.Resize(ref lehed, arlenght+1);
             lehed = lehed.Concat(new string[] { link }).ToArray();
             picker.Items.Add(link);
-            await DisplayAlert("link "+link, "arlenght "+ arlenght + "lehed " + lehed, "OK");
+            //await DisplayAlert("link "+link, "arlenght "+ arlenght + "lehed " + lehed, "OK");
         }
 
         private void Back_Clicked(object sender, EventArgs e)
@@ -118,10 +118,10 @@ namespace TARgv20
             webView.Source = new UrlWebViewSource { Url = lehed[3] };
         }
 
-        private void Swipe_Swiped(object sender, SwipedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        //private void Swipe_Swiped(object sender, SwipedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
