@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,43 @@ namespace TARgv20
         SwitchCell sc;
         ImageCell ic;
         TableSection fotosection;
+        ViewCell vc;
+        Button sms_btn, call_btn, email_btn;
+        StackLayout stack;
+        string phoneNumber, emailSend;
+        EntryCell TelefoneCell = new EntryCell
+        {
+            Label = "Telefon",
+            Placeholder = "Sisesta tel.number",
+            Keyboard = Keyboard.Telephone,
+            Text = ""
+        };
+        EntryCell EmailCell = new EntryCell
+        {
+            Label = "Email",
+            Placeholder = "Sisesta email",
+            Keyboard = Keyboard.Email,
+            Text = ""
+        };
         public Table_Page()
         {
+            call_btn = new Button { Text = "Helista"};
+            sms_btn = new Button { Text = "Saada sms" };
+            email_btn = new Button { Text = "Saada email" };
+
+            stack = new StackLayout 
+            {
+                Children = {call_btn, sms_btn, email_btn},
+                Orientation = StackOrientation.Horizontal
+            };
+
+            call_btn.Clicked += PhoneCallClick;
+            sms_btn.Clicked += MessengSendClick;
+            email_btn.Clicked += EmailSendClick;
+
+            vc = new ViewCell();
+            vc.View = stack;
+
             sc = new SwitchCell { Text = "Näita veel" };
             sc.OnChanged += Sc_OnChanged;
             ic = new ImageCell
@@ -44,24 +80,52 @@ namespace TARgv20
                     },
                     new TableSection("Kontaktandmed: ")
                     {
-                        new EntryCell
-                        {
-                            Label = "Telefon",
-                            Placeholder = "Sisesta tel.number",
-                            Keyboard = Keyboard.Telephone
-                        },
-                        new EntryCell
-                        {
-                            Label = "Email",
-                            Placeholder = "Sisesta email",
-                            Keyboard = Keyboard.Email
-                        },
+                        TelefoneCell,
+                        EmailCell,
                         sc
                     },
-                    fotosection
+
+                    fotosection,
+
+                    new TableSection()
+                    {
+                        vc
+                    }
                 }
             };
             Content = tabelview;
+        }
+
+        private void PhoneCallClick(object sender, EventArgs e)
+        {
+            tableData();
+            var phoneDialer = CrossMessaging.Current.PhoneDialer;
+            if (phoneDialer.CanMakePhoneCall)
+            {
+                phoneDialer.MakePhoneCall(phoneNumber);
+            };
+        }
+
+        private void MessengSendClick(object sender, EventArgs e)
+        {
+            //
+            tableData();
+            var smsMessenger = CrossMessaging.Current.SmsMessenger;
+            if (smsMessenger.CanSendSms)
+            {
+                smsMessenger.SendSms(phoneNumber, "Tere! \n");
+            };
+        }
+
+        private void EmailSendClick(object sender, EventArgs e)
+        {
+            //
+            tableData();
+            var emailMessenger = CrossMessaging.Current.EmailMessenger;
+            if (emailMessenger.CanSendEmail)
+            {
+                emailMessenger.SendEmail(emailSend, "Teema", "Tere! \n");
+            };
         }
 
         private void Sc_OnChanged(object sender, ToggledEventArgs e)
@@ -79,5 +143,16 @@ namespace TARgv20
                 sc.Text = "Näita veel";
             }
         }
+
+       public void tableData()
+        {
+            //if (TelefoneCell.Text.Int32() < 7)
+            //{
+
+            //}
+            phoneNumber = "+372" + TelefoneCell.Text.ToString();
+            emailSend = EmailCell.Text.ToString();
+        }
+
     }
 }
