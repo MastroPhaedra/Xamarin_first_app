@@ -17,7 +17,6 @@ namespace TARgv20
         Label header, maakondaDescribe;
         ScrollView scrollView;
         int pickerNumber = 0;
-        //string[,] array2D = new string[5,2] { { "Harjumaa1","Tallinn1"}, { "Harjumaa2", "Tallinn2" }, { "Harjumaa3", "Tallinn3" }, { "Harjumaa4", "Tallinn4" }, { "Harjumaa5", "Tallinn5" } };
         public Maakonnad_Page()
         {
             // Image
@@ -32,7 +31,8 @@ namespace TARgv20
                 Text = "Valige maakonda või pealinna ja me näitame teile infot!",
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
-            // Первый Picker
+
+            // First Picker
             picker1 = new Picker
             {
                 Title = "Maakond"
@@ -42,10 +42,9 @@ namespace TARgv20
             picker1.Items.Add("Tartumaa");
             picker1.Items.Add("Pärnumaa");
             picker1.Items.Add("Võrumaa");
-            //picker1.SelectedIndex = pickerNumber;
             picker1.SelectedIndexChanged += Picker_SelectedIndexChanged;
 
-            // Второй Picker
+            // Second Picker
             picker2 = new Picker
             {
                 Title = "Maakonna pealinn"
@@ -55,7 +54,6 @@ namespace TARgv20
             picker2.Items.Add("Tartu");
             picker2.Items.Add("Pärnu");
             picker2.Items.Add("Võru");
-            //picker2.SelectedIndex = pickerNumber;
             picker2.SelectedIndexChanged += Picker_SelectedIndexChanged;
 
             //grid
@@ -75,7 +73,7 @@ namespace TARgv20
                 }
             };
 
-            // 1 ряд
+            // 1 row
             grid.Children.Add
                 (
                     header = new Label
@@ -86,7 +84,7 @@ namespace TARgv20
                 );
             Grid.SetColumnSpan(header, 2);
 
-            // 2 ряд
+            // 2 row
             grid.Children.Add
                 (
                     picker1, 0, 1 // column, row
@@ -96,28 +94,26 @@ namespace TARgv20
                     picker2, 1, 1 // column, row
                 );
 
-            // 3 ряд
+            // 3 row
             grid.Children.Add
                 (
                     maakondImage, 0,2 // column, row
                 );
             Grid.SetColumnSpan(maakondImage, 2);
 
-            // 4 ряд
+            // 4 row
             grid.Children.Add
                 (
                     scrollView = new ScrollView { Content = maakondaDescribe }, 0, 3
                 );
             Grid.SetColumnSpan(scrollView, 2);
 
-            //StackLayout st = new StackLayout
-            //{ Children = { grid } };
             Content = grid;
         }
 
         private async void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Picker pickerDefinition = (Picker)sender; // name in xaml
+            Picker pickerDefinition = (Picker)sender; // get Picker from sender (know with / by click)
             pickerNumber = pickerDefinition.SelectedIndex;
 
             picker1.SelectedIndex = pickerNumber;
