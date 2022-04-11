@@ -12,6 +12,7 @@ namespace TARgv20
                 Text = "Tervitus!",
                 FontSize = 30,
                 FontFamily = "Georgia",
+                HorizontalOptions = LayoutOptions.CenterAndExpand
                 //HorizontalTextAlignment = "Center"
                 //BackgroundColor = Color.Azure
             };
@@ -72,12 +73,25 @@ namespace TARgv20
             };
             table_btn.Clicked += Table_btn_Clicked;
 
+            Button content_btn = new Button
+            {
+                Text = "Content Page",
+                TextColor = Color.White,
+                BackgroundColor = Color.Black
+            };
+            content_btn.Clicked += Content_btn_Clicked;
+
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn, content_btn }
             };
             //st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void Content_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Content_Page());
         }
 
         private async void Table_btn_Clicked(object sender, EventArgs e)
