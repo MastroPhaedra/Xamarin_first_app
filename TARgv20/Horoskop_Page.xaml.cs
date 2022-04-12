@@ -18,6 +18,7 @@ namespace TARgv20
         Image zodiacImage;
         Label header, zodiacDescribe;
         ScrollView scrollView;
+        public char[] charsToTrim = { '$', '*', ' ', '\'', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ',', '.', ':', ';', '-', '+', '#', '!', '/', '¤', '%', '&', '(', ')', '=', '?', '`', '[', ']', '{', '}', '<', '>'};
         public Horoskop_Page()
         {
             // DatePicker
@@ -191,7 +192,7 @@ namespace TARgv20
 
         private void Entry_Completed(object sender, EventArgs e)
         {
-            string zodiacEntryText = zodiacEntry.Text.ToLower();
+            string zodiacEntryText = zodiacEntry.Text.ToLower().Trim(charsToTrim);
             if (zodiacEntryText == "jäär" || zodiacEntryText == "jaar")
             {
                 jaarZodiac();
