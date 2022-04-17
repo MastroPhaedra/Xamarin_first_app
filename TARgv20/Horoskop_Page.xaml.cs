@@ -25,6 +25,7 @@ namespace TARgv20
             zodiacDatePicker = new DatePicker
             {
                 //Format = "dd/MM/YYYY",
+                //Date = DateTime.Now,
                 WidthRequest = 10,
                 //BackgroundColor = Color.Black,
                 //TextColor = Color.GhostWhite
@@ -53,10 +54,10 @@ namespace TARgv20
                 //PlaceholderColor = Color.LightGray,
                 WidthRequest = 10,
                 MaxLength = 10,
-                ClearButtonVisibility = ClearButtonVisibility.WhileEditing, // кнопка полной очистки поля
-                //Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence), // Заглавные буквы
-                Keyboard = Keyboard.Text, // клавиатура только для поля
-                ReturnType = ReturnType.Search, // отображает в клавиатуре иконку лупы
+                ClearButtonVisibility = ClearButtonVisibility.WhileEditing, // кнопка полной очистки поля // field clear button
+                //Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence), // Заглавные буквы // Capital letters
+                Keyboard = Keyboard.Text, // клавиатура только для поля // field-only keyboard
+                ReturnType = ReturnType.Search, // отображает в клавиатуре иконку лупы // displays a magnifying glass icon in the keyboard
                 //BackgroundColor = Color.Black,
                 //TextColor = Color.GhostWhite,
             };
@@ -121,7 +122,7 @@ namespace TARgv20
         {
             var year = e.NewDate.Year; // year
             //string i = zodiacDatePicker.Date.ToString();
-            if (new DateTime(year, 04, 14) <= e.NewDate && e.NewDate  <= new DateTime(year, 05, 14)) //YYYY MM DD - вне зависимости, какой год поставят
+            if (new DateTime(year, 04, 14) <= e.NewDate && e.NewDate  <= new DateTime(year, 05, 14)) //YYYY MM DD - вне зависимости, какой год поставят // no matter what year
             {
                 jaarZodiac();
                 zodiacEntry.Text = "Jäär";
@@ -249,7 +250,7 @@ namespace TARgv20
             header.Text = "Otsite: " + zodiacEntry.Text;
         }
 
-        public void jaarZodiac() // Овен
+        public void jaarZodiac() // Овен // Aries
         {
             zodiacImage.Source = "jaar.png";
             zodiacDescribe.Text = "Jäära märgi sümboolika tuleneb asjaolust, " +
@@ -259,7 +260,7 @@ namespace TARgv20
                 "Ka oma tegevuse etteplaneerimine ja tagajärgedele mõtlemine ei ole Jäära tugevaim omadus.";
         }
 
-        public void sonnZodiac() // Телец
+        public void sonnZodiac() // Телец // Taurus
         {
             zodiacImage.Source = "sonn.png";
             zodiacDescribe.Text = "Sõnn on ürgse elujõu, enesesäilitamise sümbol, kes on loodud jätkama Jäära poolt alustatut. " +
@@ -269,7 +270,7 @@ namespace TARgv20
                 "Sageli väga tundliku kompimismeelega ja kunstiandega. Negatiivse poole pealt on Sõnn kangekaelne, laisavõitu ja väga pika vihaga.";
         }
 
-        public void kaksikudZodiac() // Близнецы
+        public void kaksikudZodiac() // Близнецы // Twins
         {
             zodiacImage.Source = "kaksikud.png";
             zodiacDescribe.Text = "Infole orienteeritud Kaksikute märk on sodiaagi esimene mentaalne märk. " +
@@ -281,7 +282,7 @@ namespace TARgv20
                 "kergesti tüdinevad ega suuda oma ettevõtmisi lõpule viia. Sõnaosavust võib ta kasutada ka omakasupüüdlikel eesmärkidel.";
         }
 
-        public void vahkZodiac()
+        public void vahkZodiac() // Рак // Cancer
         {
             zodiacImage.Source = "vahk.png";
             zodiacDescribe.Text = "Vähk on energiline ja ettevõtlik nagu kõik pööripäevast algavad märgid, " +
@@ -291,7 +292,7 @@ namespace TARgv20
                 "emotsionaalne mälu on hästi arenenud. Negatiivse poole pealt on inimene tujukas, subjektiivne, väga kergesti haavatav ning peab solvanguid kaua meeles.";
         }
 
-        public void loviZodiac()
+        public void loviZodiac() // Лев // Lion
         {
             zodiacImage.Source = "lovi.png";
             zodiacDescribe.Text = "Südasuve sümbol, elurõõmust pakatav Lõvi märk tähistab ehedat loomiskirge.Inimene, kel on Päike Lõvis, on energiline, " +
@@ -302,7 +303,7 @@ namespace TARgv20
                 "jäik oma põhimõtete järgimisel ja kergesti haavuv.";
         }
 
-        public void neitsiZodiac()
+        public void neitsiZodiac() // Дева // Virgo
         {
             zodiacImage.Source = "neitsi.png";
             zodiacDescribe.Text = "Neitsi on suve viimane märk, ta teeb sümboolselt kokkuvõtteid, korrastab, toob saadud kogemustest välja olulise. " +
@@ -313,7 +314,7 @@ namespace TARgv20
                 "mis omakorda kahandab tema eneseusku ja halvendab tervist. Neitsi võib olla üsna ahne nagu kõik maa elemendi märgid.";
         }
 
-        public void kaaludZodiac()
+        public void kaaludZodiac() // Весы // Libra
         {
             zodiacImage.Source = "kaalud.png";
             zodiacDescribe.Text = "Jäära vastasmärk Kaalud, mis algab sügisesest pöörihetkest, kehastab harmooniatunnetust, diplomaatiat, suhtlusoskust, " +
@@ -323,7 +324,7 @@ namespace TARgv20
                 "Kaalud püüab alati langetada parimat võimalikku otsust ja võib seetõttu kaua kaaluda.";
         }
 
-        public void skorpionZodiac()
+        public void skorpionZodiac() // Скорпион // Scorpion
         {
             zodiacImage.Source = "skorpion.png";
             zodiacDescribe.Text = "Vee elemendi märk Skorpion on orienteeritud hingele ja sellele, mis on pealispinna all, silmaga nähtamatu. " +
@@ -334,7 +335,7 @@ namespace TARgv20
                 "samuti võib probleemiks olla liigne omandiinstinkt ja võimuiha";
         }
 
-        public void amburZodiac()
+        public void amburZodiac() // Стрелец // Sagittarius
         {
             zodiacImage.Source = "ambur.png";
             zodiacDescribe.Text = "Amburi märk on seotud ühismõtte, suurte religioonide ja filosoofiatega. Inimene, kel on Päike Amburis, " +
@@ -345,7 +346,7 @@ namespace TARgv20
                 "ja soov aina edasi minna. Ambur armastab tõde ja võib seetõttu olla kuni taktitundetuseni otsekohene.";
         }
 
-        public void kaljukitsZodiac()
+        public void kaljukitsZodiac() // Козерог // Capricorn
         {
             zodiacImage.Source = "kaljukits.png";
             zodiacDescribe.Text = "Talvisel pööripäeval talve algushetkel läheb Päike astroloogiliselt Kaljukitse märki. " +
@@ -356,7 +357,7 @@ namespace TARgv20
                 "Negatiivse poole pealt võib ta kahelda oma väärtuses ja arvata, et ka armastus tuleb tööga välja teenida";
         }
 
-        public void veevalajaZodiac()
+        public void veevalajaZodiac() // Водолей // Aquarius
         {
             zodiacImage.Source = "veevalaja.png";
             zodiacDescribe.Text = "Õhumärk Veevalaja on seotud ühiste energiaväljadega, nii ühiste tegude kui mõtetega. " +
@@ -367,7 +368,7 @@ namespace TARgv20
                 "Samuti on ta üsna jäiga mõtlemisega, pidades oma ideid ainuõigeiks.";
         }
 
-        public void kaladZodiac()
+        public void kaladZodiac() // Рыбы // Pisces
         {
             zodiacImage.Source = "kalad.png";
             zodiacDescribe.Text = "Sodiaagi viimane märk võtab kokku kõigi eelmiste märkide kogemused. Kalade Päikesega inimesel on teiste märkide esindajaist tugevam tervikutaju, " +
@@ -378,7 +379,7 @@ namespace TARgv20
                 "ning probleemide eest põgenema";
         }
 
-        public void tyhiZodiac()
+        public void tyhiZodiac() // nothing
         {
             zodiacImage.Source = "tyhi.png";
             zodiacDescribe.Text = "Andmed puuduvad";
