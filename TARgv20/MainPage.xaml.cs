@@ -59,7 +59,7 @@ namespace TARgv20
 
             Button picker_btn = new Button
             {
-                Text = "Picker",
+                Text = "WEB browser",
                 TextColor = Color.White,
                 BackgroundColor = Color.Black
             };
