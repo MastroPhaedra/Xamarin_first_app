@@ -32,7 +32,7 @@ namespace TARgv20
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
 
-            // First Picker
+            // First Picker "Maakond"
             picker1 = new Picker
             {
                 Title = "Maakond"
@@ -44,7 +44,7 @@ namespace TARgv20
             picker1.Items.Add("Võrumaa");
             picker1.SelectedIndexChanged += Picker_SelectedIndexChanged;
 
-            // Second Picker
+            // Second Picker "Pealinnad"
             picker2 = new Picker
             {
                 Title = "Maakonna pealinn"
