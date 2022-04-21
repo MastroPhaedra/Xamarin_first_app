@@ -63,7 +63,7 @@ namespace TARgv20
                 {
                     new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) },
                     new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(4, GridUnitType.Star) },
+                    new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = new GridLength(6, GridUnitType.Star) }
                 },
                 ColumnDefinitions =
