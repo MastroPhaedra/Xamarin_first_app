@@ -18,7 +18,8 @@ namespace TARgv20
         TimePicker ajaplaanTimePicker;
         Image ajaplaanImage;
         Label header;
-        String timeNow = DateTime.Now.ToString("HH:mm");
+        private Button plus2HoursButton, minus2HoursButton;
+        private Int16 plusOrMinusForTimeButton;
         public Ajaplaan_Page()
         {
             // TimePicker
@@ -31,7 +32,9 @@ namespace TARgv20
             {
                 Format = "HH:mm",
                 Time = DateTime.Now.TimeOfDay, //            // Time = new System.TimeSpan(17, 0, 0) .ToString("HH:mm") .TimeOfDay
-                WidthRequest = 10,
+                //WidthRequest = 10,
+                //HeightRequest = 10,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
                 //VerticalOptions = LayoutOptions.StartAndExpand
                 //BackgroundColor = Color.Black,
                 //TextColor = Color.GhostWhite
@@ -42,10 +45,28 @@ namespace TARgv20
             ajaplaanImage = new Image
             {
                 Source = "tyhi.png",
-                WidthRequest = 80,
-                HeightRequest = 80,
+                WidthRequest = 360,
+                HeightRequest = 200,
                 //VerticalOptions = LayoutOptions.StartAndExpand
             };
+
+            // +2 hours button
+            plus2HoursButton = new Button 
+            {
+                Text = "+2 Hours",
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            plus2HoursButton.Clicked += PlusOrMinus2HoursButton_Clicked;
+
+            // -2 hours button
+            minus2HoursButton = new Button 
+            {
+                Text = "-2 Hours",
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            minus2HoursButton.Clicked += PlusOrMinus2HoursButton_Clicked;
 
             // taps
             var tapGestureRecognizer = new TapGestureRecognizer();
@@ -59,8 +80,9 @@ namespace TARgv20
             {
                 RowDefinitions =
                 {
-                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(9, GridUnitType.Star) }
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto }
                 },
                 ColumnDefinitions =
                 {
@@ -74,7 +96,7 @@ namespace TARgv20
                 (
                     header = new Label
                     {
-                        Text = "Ajaplaan",
+                        //Text = "Ajaplaan",
                         FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
                     }, 0, 0 // column, row
                 );
@@ -92,7 +114,43 @@ namespace TARgv20
                     ajaplaanTimePicker, 1, 1 // column, row
                 );
 
+            // 3 row 1 column
+            grid.Children.Add
+                (
+                    plus2HoursButton, 0, 2 // column, row
+                );
+
+            // 3 row 2 column
+            grid.Children.Add
+                (
+                    minus2HoursButton, 1, 2 // column, row
+                );
+
             Content = grid;
+        }
+
+        //private void Minus2HoursButton_Clicked(object sender, EventArgs e)
+        //{
+        //    DateTime timeForButton = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, // year (now) - month (now) - day (now)
+        //        ajaplaanTimePicker.Time.Hours, ajaplaanTimePicker.Time.Minutes, ajaplaanTimePicker.Time.Seconds) // - hours (from TimePicker) - minutes (from TimePicker) - seconds (from TimePicker, but no one would not see seconds)
+        //        .AddHours(-2); // adding 2 hours to date
+        //    ajaplaanTimePicker.Time = TimeSpan.Parse(timeForButton.ToString("HH:mm")); // converts back new datetime (with +2 hours) to TimeSpan
+        //}
+
+        private void PlusOrMinus2HoursButton_Clicked(object sender, EventArgs e)
+        {
+            if (sender == plus2HoursButton)
+            {
+                plusOrMinusForTimeButton = 2;
+            }
+            else if (sender == minus2HoursButton)
+            {
+                plusOrMinusForTimeButton = -2;
+            }
+            DateTime timeForButton = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, // year (now) - month (now) - day (now)
+                ajaplaanTimePicker.Time.Hours, ajaplaanTimePicker.Time.Minutes, ajaplaanTimePicker.Time.Seconds) // - hours (from TimePicker) - minutes (from TimePicker) - seconds (from TimePicker, but no one would not see seconds)
+                .AddHours(plusOrMinusForTimeButton); // adding 2 hours to date
+            ajaplaanTimePicker.Time = TimeSpan.Parse(timeForButton.ToString("HH:mm")); // converts back new datetime (with +2 hours) to TimeSpan
         }
 
         private void ajaplaanTimePicker_PropertyChanged(object sender, PropertyChangedEventArgs e)
