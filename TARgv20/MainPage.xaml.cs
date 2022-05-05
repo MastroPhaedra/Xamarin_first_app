@@ -81,12 +81,25 @@ namespace TARgv20
             };
             content_btn.Clicked += Content_btn_Clicked;
 
+            Button list_btn = new Button
+            {
+                Text = "List Page",
+                TextColor = Color.White,
+                BackgroundColor = Color.Black
+            };
+            list_btn.Clicked += List_btn_Clicked;
+
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn, content_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn, content_btn, list_btn }
             };
             //st.BackgroundColor = Color.Beige;
             Content = st;
+        }
+
+        private async void List_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new List_Page());
         }
 
         private async void Content_btn_Clicked(object sender, EventArgs e)
