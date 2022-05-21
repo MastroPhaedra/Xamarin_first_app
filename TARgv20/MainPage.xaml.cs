@@ -89,25 +89,12 @@ namespace TARgv20
             };
             list_btn.Clicked += List_btn_Clicked;
 
-            Button eu_riigid_btn = new Button
-            {
-                Text = "EU Riigid Page",
-                TextColor = Color.White,
-                BackgroundColor = Color.Black
-            };
-            eu_riigid_btn.Clicked += Eu_riigid_btn_Clicked; ;
-
             StackLayout st = new StackLayout
             {
-                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn, content_btn, list_btn, eu_riigid_btn }
+                Children = { label_lbl, box_btn, entry_btn, timer_btn, rgb_btn, tic_btn, picker_btn, table_btn, content_btn, list_btn }
             };
             //st.BackgroundColor = Color.Beige;
             Content = st;
-        }
-
-        private async void Eu_riigid_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new EU_Riigid_Page());
         }
 
         private async void List_btn_Clicked(object sender, EventArgs e)
