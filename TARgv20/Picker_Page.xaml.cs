@@ -88,7 +88,7 @@ namespace TARgv20
             Content = st;
         }
 
-        private async void Favorite_Clicked(object sender, EventArgs e)
+        private void Favorite_Clicked(object sender, EventArgs e)
         {
             int arlenght;
             link = "https://" + line.Text;

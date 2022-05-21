@@ -34,7 +34,7 @@ namespace TARgv20
         }
 
         int i = 0;
-        private async void Editor_TextChanged(object sender, TextChangedEventArgs e)
+        private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             editor.TextChanged -= Editor_TextChanged;
             char k = e.NewTextValue?.LastOrDefault() ?? ' ';

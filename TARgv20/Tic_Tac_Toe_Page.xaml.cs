@@ -202,7 +202,7 @@ namespace TARgv20
             botClickAmount = 0;
         }
 
-        public async void bot_rand(Image DelFromDic)
+        public void bot_rand(Image DelFromDic)
         {
             botClickAmount++;
             Random rnd = new Random();

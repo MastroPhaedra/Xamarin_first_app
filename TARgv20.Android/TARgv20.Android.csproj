@@ -54,6 +54,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>2.0.0.14</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Messaging">
       <Version>5.2.0</Version>
     </PackageReference>
@@ -70,6 +73,10 @@
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\drawable\samsung_s22_ultra.webp" />
+    <AndroidResource Include="Resources\drawable\Flag_of_Ukraine.webp" />
+    <AndroidResource Include="Resources\drawable\Flag_of_Estonia.webp" />
+    <AndroidResource Include="Resources\drawable\Flag_of_Nigeria.webp" />
+    <AndroidResource Include="Resources\drawable\Flag_of_the_USA.webp" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.xml" />
