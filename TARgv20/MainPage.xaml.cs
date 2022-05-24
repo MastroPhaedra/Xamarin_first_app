@@ -95,7 +95,7 @@ namespace TARgv20
                 TextColor = Color.White,
                 BackgroundColor = Color.Black
             };
-            eu_riigid_btn.Clicked += Eu_riigid_btn_Clicked; ;
+            eu_riigid_btn.Clicked += Eu_riigid_btn_Clicked;
 
             StackLayout st = new StackLayout
             {
