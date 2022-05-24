@@ -13,7 +13,8 @@ namespace TARgv20
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EU_Riigid_Page : ContentPage
     {
-        // https://devlinduldulao.pro/xamarin-forms-101-how-to-create-a-popup-form-in-xamarin-forms/
+        // hide switchcell xamarin forms
+        // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/tableview
         // form in popup xamarin forms
         public class Country
         {
